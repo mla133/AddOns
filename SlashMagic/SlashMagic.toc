@@ -1,0 +1,10 @@
+## Interface: 60000
+## Title: Slash Magic
+## Version: 2014-10-16
+## Notes: Make your own custom slash commands with lua without leaving the game.
+## Author: Bill Lafreniere
+## OptionalDeps: BillsUtils
+## SavedVariables: SlashMagic_Settings, SlashMagic_Commands, SlashMagic_CmdVars
+
+BULoader.lua
+SlashMagic.lua

@@ -1,0 +1,12 @@
+## Interface: 60000
+## Title: Slash Magic Config
+## Version: 2014-10-16
+## Notes: Load On Demand Config GUI for SlashMagic
+## Author: Bill Lafreniere
+## LoadOnDemand: 1
+## Dependencies: SlashMagic
+
+coloring_WoW_API.lua
+coloring_Lua.lua
+indent.lua
+Config.lua
