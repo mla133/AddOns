@@ -1,0 +1,18 @@
+## Interface: 20400
+
+## Title: Fuzzy Logic
+## Notes: Easy pet management
+## Author: Tekkub Stoutwrithe
+## Version: Alpha
+## X-Website: http://code.google.com/p/tekkub-wow/
+## X-Email: tekkub-wow@googlegroups.com
+## X-Category: Hunter
+
+## OptionalDeps: Dongle
+
+## LoadManagers: AddonLoader
+## X-LoadOn-Class: Hunter
+
+Dongle.lua
+
+FuzzyLogic.lua
