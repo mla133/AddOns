@@ -9,4 +9,4 @@ cd $CLONEDIR
 mv NewAddon.lua $CLONEDIR.lua
 mv NewAddon.toc $CLONEDIR.toc
 sed -i -- "s/NewAddon/$CLONEDIR/g" $CLONEDIR.*
-sed -i -- "s/40300/$VERSION/g" $CLONEDIR.toc
+sed -i -- "s/60100/$VERSION/g" $CLONEDIR.toc
