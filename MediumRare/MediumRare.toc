@@ -1,0 +1,16 @@
+## Interface: 30300
+
+## Title: Medium Rare
+## Notes: Scans NPCs around you for rares
+## Author: Tekkub Stoutwrithe
+## Version: Alpha
+## X-Website: http://tekkub.net/
+## X-Email: tekkub-wow@googlegroups.com
+## X-Category: Misc
+## X-Icon: Interface\Icons\INV_Misc_Food_65
+
+## LoadManagers: AddonLoader
+## X-LoadOn-NotResting: true
+
+ids.lua
+MediumRare.lua

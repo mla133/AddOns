@@ -1,0 +1,17 @@
+## Interface: 30000
+
+## Title: Spew
+## Notes: Spews out lua
+## Author: Tekkub Stoutwrithe
+## Version: Alpha
+## X-Category: Development Tools
+## X-Icon: Interface\Icons\Spell_Nature_Acid_01
+
+## LoadManagers: AddonLoader
+## X-LoadOn-Slash: /spew
+
+LibStub.lua
+tekPanelAuction.lua
+tekKonfigButton.lua
+
+Spew.lua
