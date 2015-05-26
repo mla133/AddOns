@@ -3,10 +3,10 @@
 # Also will accept a version number to update the Interface number in TOC file.
 
 CLONEDIR=$1
-VERSION=$2
+VERSION=60100
 cp -r wow-NewAddon/ $CLONEDIR
 cd $CLONEDIR
 mv NewAddon.lua $CLONEDIR.lua
 mv NewAddon.toc $CLONEDIR.toc
 sed -i -- "s/NewAddon/$CLONEDIR/g" $CLONEDIR.*
-sed -i -- "s/40300/$VERSION/g" $CLONEDIR.toc
+sed -i -- "s/60100/$VERSION/g" $CLONEDIR.toc
