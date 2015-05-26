@@ -1,4 +1,4 @@
-## Interface: 30300
+## Interface: 60100
 ## Title: Hey There!
 ## Notes: Provides slash commands to greet other players
 
