@@ -1,0 +1,6 @@
+## Interface: 60100
+## Title:  CombatTracker
+## Notes:  Tracks incoming DPS, and how long combat lasts
+
+CombatTracker.lua
+CombatTracker.xml
