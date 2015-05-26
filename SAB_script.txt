@@ -1,0 +1,37 @@
+## Run following code in WoWLua to create a new secure action button
+
+SABTest = CreateFrame(“Button“, “SABTest“, UIParent, “SecureActionButtonTemplate,UIPanelButtonTemplate2“)
+SABTest:SetWidth(80)
+SABTest:SetHeight(20)
+SABTest:SetText(“SABTest“)
+SABTest:SetPoint(“CENTER“, 0, 0)
+SABTest:SetAttribute(“spell“, “Attack“)
+SABTest:RegisterForClicks(“AnyUp“)
+
+## Small red button should appear in middle of screen
+
+## Run following command to toggle auto-attack on/off when you have a target
+/run SABTest:SetAttribute("type", "spell")
+
+## Casting a beneficial spell, run this:
+/run SABTest:SetAttribute(“type“, “spell“)
+/run SABTest:SetAttribute(“spell“, “Healing Wave“)
+
+## Target yourself with the above click:
+/run SABTest:SetAttribute(“unit“, “player“)
+
+## Casting a harmful spell
+/run SABTest:SetAttribute(“spell“, “Lightning Bolt“)
+/run SABTest:SetAttribute(“unit“, “target“)
+
+## Using an "item" type button
+/run SABTest:SetAttribute(“type“, “item“)
+/run SABTest:SetAttribute(“item“, “Heavy Frostweave Bandage“)
+/run SABTest:SetAttribute(“unit“, “player“)
+
+## Using an item with a "macro" type button
+## like /use [target=player] Heavy Frostweave Bandage
+
+/run SABTest:SetAttribute(“type“, “macro“)
+/run SABTest:SetAttribute(“macrotext“, “/use [target=player] Heavy Frostweave Bandage“)
+
