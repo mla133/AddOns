@@ -1,0 +1,425 @@
+
+Game Guides
+FREE - In Google Play
+VIEW
+ 
+
+World of Warcraft API
+Last edited on May 23, 2015
+by Sitb
+Reference 
+e
+AddOns
+WoW API
+Widget API
+XML UI
+Event API
+WoW Lua
+Macro API
+CVars
+Changes
+
+Web API
+
+HOWTOs
+Snippets
+UI tech.
+
+Categories
+
+→ WoW API
+This is the main reference page for the WoW UI Lua API available to user Macros and AddOns. This is the API available during normal game play. See also WoW Glue API.
+
+advertisement
+
+Introduction
+The World of Warcraft API, or WoW API, is a set of Lua functions and facilities provided by the Blizzard WoW Client, to allow interaction with the World of Warcraft and its user interface. The list below is incomplete, and kept up to date through user contributions. See also the an automatically-generated exhaustive list of all API functions present in the latest live client.
+
+For beginners, WoW AddOn contains a number of very informative sources to help get you started. You can also examine the existing UI code to find examples of how the various functions are used by the default UI. Discuss any large-scale changes on the discussion page.
+
+Reference
+Global API functions for WoW in Lua.
+
+API types - variable value types, used here as parameters and return values.
+If you're contributing documentation, please read How to edit API pages.
+
+Function names can be prefixed with the following tags, see API notation and conventions:
+
+PROTECTED - can only be called from secure code. See Protected Functions.
+NOCOMBAT - can only be called from secure code while out of combat.
+HW - may only be called in response to a hardware event, like from OnClick handlers.
+UI - is implemented in Lua in FrameXML, but was important enough to appear here.
+DEPRECATED - is planned to no longer be used, and more than likely removed in future version.
+REMOVED - was removed from the API. should be moved from here to Removed Functions.
+Calling functions via macro or command line:
+
+/run BNSetMatureLanguageFilter(true)
+/run local x=GetAccountExpansionLevel(); SendChatMessage(x)
+Account
+GetAccountExpansionLevel() - Returns registered expansion. (0=WoW, 1=BC, 2=WotLK, 3=Cata, 4=MoP 5=WoD)
+These functions only return meaningful values on Asian realms; all three relate to the play time limitation system.
+
+GetBillingTimeRested() - returns the time spent logged in current billing unit.
+PartialPlayTime() - returns 1 if the player is currently "tired": reduced XP, loot.
+NoPlayTime() - returns 1 if the player is currently "unhealthy": no XP, loot.
+Achievement
+These functions are only available in Patch 3.0
+
+AddTrackedAchievement(achievementId) - Add an achievement to tracking.
+CanShowAchievementUI() - Returns if the AchievementUI can be displayed
+ClearAchievementComparisonUnit() - Remove the unit being compared.
+GetAchievementCategory(achievementID) - Return the category number of the requested achievement.
+GetAchievementComparisonInfo(achievementID, comparisonNum) - Returns status of achievement for comparison player.
+GetAchievementCriteriaInfo(achievementID, criteriaIndex) - Returns information about the requested criteria.
+GetAchievementCriteriaInfoByID(achievementID, criteriaID) - Returns information about the requested criteria. (added 5.0.4)
+GetAchievementInfo(achievementID) or (category, offset) - Returns information about the requested Achievement.
+GetAchievementInfoFromCriteria(id) - Returns information about the requested Achievement.
+GetAchievementLink(achievementID) - Returns a achievementLink for the specified Achievement.
+GetAchievementNumCriteria(achievementID) - Return the number of criteria the requested Achievement has.
+GetAchievementNumRewards(achievementID) - Return the number of rewards the requested Achievement has.
+GetCategoryInfo(category) - Return information about the requested category
+GetCategoryList() - Returns the list of Achievement categories.
+GetCategoryNumAchievements(category) - Return the total Achievements and number completed for the specific category.
+GetComparisonAchievementPoints() - Return the total number of achievement points the comparison unit has earned.
+GetComparisonCategoryNumAchievements(achievementID)
+GetComparisonStatistic(achievementID) - Return the value of the requested statistic for the comparison player.
+GetLatestCompletedAchievements() - Return the ID's of the last 5 completed Achievements.
+GetLatestCompletedComparisonAchievements()
+GetLatestUpdatedComparisonStats()
+GetLatestUpdatedStats() - Return the ID's of the last 5 updated Statistics.
+GetNextAchievement(achievementID)
+GetNumComparisonCompletedAchievements()
+GetNumCompletedAchievements([guildOnly]) - Returns total and completed number of achievements, or only guild.
+GetPreviousAchievement(achievementID) - Return previous related achievements.
+GetStatistic(achievementID) - Return the value of the requested statistic.
+GetStatisticsCategoryList() - Returns the list of Statistic categories.
+GetTotalAchievementPoints([guildOnly]) - Return the total, or only guild, achievement points earned.
+GetTrackedAchievements() - Return the AchievementID of the currently tracked achievements
+GetNumTrackedAchievements() - Return the total number of the currently tracked achievements
+RemoveTrackedAchievement(achievementID) - Stops an achievement from being tracked
+SetAchievementComparisonUnit(unitId) - Set the unit to be compared to.
+Action
+These functions are those which operate with the action buttons. See #Activity section for general player actions.
+
+PROTECTED UI ActionButtonDown(id) - Press the specified action button. (protected 2.0)
+PROTECTED UI ActionButtonUp(id) - Release the specified action button. (protected 2.0)
+ActionHasRange(slot) - Determine if the specified action is a range restriction [1 if yes, nil if no]
+UI BonusActionButtonDown - Trigger the specified bonus(pet or minion) action button.
+UI BonusActionButtonUp - Release the specified bonus(pet or minion) action button.
+PROTECTED CameraOrSelectOrMoveStart() - Begin "Left click" in the 3D world. (protected 1.10)
+PROTECTED CameraOrSelectOrMoveStop([stickyFlag]) - End "Left click" in the 3D world. (protected 1.10)
+NOCOMBAT ChangeActionBarPage(page) - Changes the current action bar page.
+GetActionBarPage() - Return the current action bar page. CURRENT_ACTIONBAR_PAGE is obsolete.
+GetActionBarToggles() - Return the toggles for each action bar.
+GetActionCooldown(slot) - This returns the cooldown values of the specified action..
+GetActionCount(slot) - Get the count (bandage/potion/etc) for an action, returns 0 if none or not applicable.
+GetActionInfo(slot) - Returns type, id, subtype.
+GetActionText(slot) - Get the text label (macros, etc) for an action, returns nil if none.
+GetActionTexture(slot) - Gets the texture path for the specified action.
+GetBonusBarOffset() - Determine which page of bonus actions to show.
+GetMouseButtonClicked() - Returns the name of the button that triggered a mouse down/up/click/doubleclick event. (added 2.0.3)
+GetMultiCastBarOffset() - Returns the page offset of the multicast action IDs (added 3.2)
+GetPossessInfo(index) - Returns texture, name, enabled.
+HasAction(slot) - Returns 1 if the player has an action in the specified slot, nil otherwise.
+IsActionInRange(slot,[unit]) - Test if an action is in range (1=yes, 0=no, nil=not applicable).
+IsAttackAction(slot) - Return 1 if an action is an 'attack' action (flashes during combat), nil otherwise.
+IsAutoRepeatAction(slot) - Return 1 if an action is auto-repeating, nil otherwise.
+IsCurrentAction(slot) - Return 1 if an action is the one currently underway, nil otherwise.
+IsConsumableAction(slot) - Return 1 if an action is consumable (i.e. has a count), nil otherwise.
+IsEquippedAction(slot) - Return 1 if an action is equipped (i.e. connected to an item that must be equipped), nil otherwise.
+IsUsableAction(slot) - Return 1 if an action can be used at present, nil otherwise.
+PetHasActionBar() - Determine if player has a pet with an action bar.
+NOCOMBAT PickupAction(slot) - Drags an action out of the specified quickbar slot and holds it on the cursor.
+NOCOMBAT PickupPetAction(slot) - Drags an action from the specified pet action bar slot into the cursor.
+PlaceAction(slot) - Drops an action from the cursor into the specified quickbar slot.
+SetActionBarToggles(show1,show2,show3,show4[, alwaysShow]) - Set show toggle for each action bar - 'alwaysShow' (added 1.12)
+StopAttack() - Turns off auto-attack, if currently active. Has no effect is the player does not currently have auto-attack active.
+PROTECTED TurnOrActionStart() - Begin "Right Click" in the 3D world. (protected 1.10)
+PROTECTED TurnOrActionStop() - End "Right Click" in the 3D world. (protected 1.10)
+PROTECTED UseAction(slot[, checkCursor[, onSelf]]) - This instructs the interface to use the action associated with the specified ID, optionally on the player, regardless of target. (protected 2.0)
+Activity
+These functions make the player do something, and which aren't covered elsewhere and aren't simply confirmation steps.
+
+AcceptDuel() - The player accepts the challenge to duel.
+PROTECTED AttackTarget() - Attacks the targetted unit.
+CancelDuel() - Refuse the invitation to fight a duel.
+CancelLogout() - Cancels the logout timer, from camping or quitting.
+ClearTutorials()
+CancelSummon() - Rejects a summon request.
+ConfirmSummon() - Accepts a summon request.
+PROTECTED DescendStop() - The player stops descending, while swimming or flying. (added 2.1)
+Dismount() - The player dismounts the current mount. (added 2.0.3)
+FlagTutorial("tutorial")
+ForceQuit() - Instantly quits the game, bypassing the timer.
+GetPVPTimer() - Returns the amount of time until your PvP flag fades.
+GetSummonConfirmAreaName() - Returns the name of the area you're being summoned to.
+GetSummonConfirmSummoner() - Returns the name of the player summoning you.
+GetSummonConfirmTimeLeft() - Returns the amount of time left before the pending summon expires.
+Logout - Logs the user out of the game.
+Quit - Quits the game, not the Lua script.
+RandomRoll(low, high) - Does a random roll between the two values.
+SetPVP(arg1) - Sets the players PVP mode (1 to enable, nil to toggle off eventually)
+PROTECTED SitStandOrDescendStart() - The player sits, stands, or descends (added 2.1)
+PROTECTED StartDuel("name") - Challenge someone to a duel, by name. (protected 2.0)
+TogglePVP() - Toggles PVP status
+ToggleSheath() - Toggles sheathed or unsheathed weapons.
+UseSoulstone() - Use an active soulstone to resurrect yourself after death. Also works for Shamans with Reincarnation available.
+AddOn
+DisableAddOn(index or "AddOnName") - Disable the specified AddOn for subsequent sessions.
+DisableAllAddOns() - Disable all AddOns for subsequent sessions.
+EnableAddOn(index or "AddOnName") - Enable the specified AddOn for subsequent sessions.
+EnableAllAddOns() - Enable all AddOns for subsequent sessions.
+GetAddOnDependencies(index or "AddOnName") - Get dependency list for an AddOn.
+GetAddOnInfo(index or "AddOnName") - Get information about an AddOn.
+GetAddOnMetadata(index or "name", "variable") - Retrieve metadata from addon's TOC file.
+GetNumAddOns() - Get the number of user supplied AddOns.
+IsAddOnLoaded(index or "AddOnName") - Returns true if the specified AddOn is loaded.
+IsAddOnLoadOnDemand(index or "AddOnName") - Test whether an AddOn is load-on-demand.
+LoadAddOn(index or "AddOnName") - Request loading of a Load-On-Demand AddOn.
+ResetDisabledAddOns()
+Archaeology
+Functions for the Archaeology Profession. Added in 4.0.1 Cataclysm.
+
+CanSolveArtifact()
+GetArtifactInfoByRace(raceIndex, projectIndex)
+GetArtifactProgress()
+GetNumArtifactsByRace(index)
+GetSelectedArtifactInfo()
+IsArtifactCompletionHistoryAvailable() - Returns 1 if the player has completed at least one artifact, otherwise nil;
+ItemAddedToArtifact(index) - Returns true if an item is in the indicated artifact slot, otherwise false.
+RemoveItemFromArtifact(SlotID)
+RequestArtifactCompletionHistory()
+SocketItemToArtifact(SlotID)
+Arena
+AcceptArenaTeam() - Accepts a pending Arena team invitation.
+ArenaTeamInviteByName(teamIndex, playerName) - Invites the specified player to the specified arena team.
+ArenaTeamSetLeaderByName(teamIndex, playerName) - Sets new Team Leader to the specified arena team.
+ArenaTeamLeave(teamIndex) - Leaves the specified arena team.
+ArenaTeamRoster(teamIndex) - Sends a request to the server to request the most recent information on a specific Arena Team that you are in.
+ArenaTeamUninviteByName(teamIndex, playerName) - Removes the specified played from the specified arena team.
+ArenaTeamDisband(teamIndex) - Disbands the arena team without any warning! Requires you to be the leader of the team. (added 2.1.3)
+DeclineArenaTeam() - Declines a pending Arena team invitation.
+GetArenaTeam(teamIndex) - Returns information regarding the players arena team, nil if the player is not in the passed team
+GetArenaTeamGdfInfo() - (added 3.0.8)
+GetArenaTeamRosterInfo(teamIndex, playerIndex) - Returns information regarding a player from the specified team. This requires a call to #ArenaTeamRoster you only need to do this when the player logins in, UI reloads will not effect the return.
+GetBattlefieldTeamInfo(index) - Gets info about a registered Arena Team at the end of an arena match.
+GetCurrentArenaSeason() - Gets the current Arena season.
+GetInspectArenaTeamData(index) - Retrieves all the data associated with the inspected player's arena team located at index.
+GetNumArenaTeamMembers(teamIndex[, showOffline]) - Gets the number of arena team members. This requires a call to #ArenaTeamRoster you only need to do this when the player logins in, UI reloads will not effect the return.
+GetPreviousArenaSeason() - Gets the previous Arena season.
+IsActiveBattlefieldArena() - Returns true if in an Arena Match, also Returns true for the second argument if it's a registered match.
+IsArenaTeamCaptain(teamIndex) - Returns a value based on whether the player is the arena team captain.
+IsInArenaTeam() - Returns true if you are a member of an arena team.
+Auction
+CalculateAuctionDeposit(runTime, stackSize, numStacks) - Returns the required deposit for the current selling item given the specified duration (1=12h, 2=24h, 3=48h).
+CanCancelAuction(index) - Returns 1 if auction can be canceled.
+CancelSell() - Clears the auction house listing queue, not creating any additional auctions. (added 3.3.3)
+CanSendAuctionQuery() - Return 1 if auction search button would be active, nil otherwise.
+CancelAuction(index) - Cancel the specified auction (on the "owner" list).
+ClickAuctionSellItemButton() - Puts the currently 'picked up' item into the 'create auction' slot.
+CloseAuctionHouse() - Will close the AuctionFrame if opened.
+DEPRECATED GetAuctionHouseDepositRate() - Returns the deposit rate (percentage) for the currently open auction house. (obsolete by '#CalculateAuctionDeposit')
+GetAuctionInvTypes(classIndex, subclassIndex) - Returns types of subcategories items.
+GetAuctionItemClasses() - Returns major auction item categories.
+GetAuctionItemInfo("type", index) - Returns details about the specified auction item.
+GetAuctionItemLink("type", index) - Returns an itemLink for the specified auction item.
+GetAuctionItemSubClasses(classIndex) - Returns subcategories in the nth auction category.
+GetAuctionItemTimeLeft("type", index) - Returns the time left status of the specified auction item.
+GetAuctionSellItemInfo() - Returns information about the current selling item (or nil if none selected).
+DEPRECATED GetBidderAuctionItems([page]) - Returns details about an auction item on which the user is bidding (obsolete by '#CalculateAuctionDeposit("bidder", item)')
+GetNumAuctionItems("type") - Returns the size of the specified auction item list.
+DEPRECATED GetOwnerAuctionItems([page]) - Returns details about an auction item of which the user is the owner (obsolete by '#GetAuctionItemInfo("owner", item)')
+GetSelectedAuctionItem("type") - Returns the index (1-50) of the selected auction item or 0 if none is selected.
+IsAuctionSortReversed("type", "sort") - Returns 1 if the specified auction list and sort is reversed, nil otherwise.
+PlaceAuctionBid("type", index, bid) - Place a bid on the selected auction item.
+QueryAuctionItems("name", minLevel, maxLevel, invTypeIndex, classIndex, subclassIndex, page, isUsable, qualityIndex) - Performs a search of the auction house with the specified characteristics.
+SetAuctionsTabShowing(showing) - Sets whether auction-related events should be delivered to the client. (added 3.3.3)
+SetSelectedAuctionItem("type", index) - Selects a specific item in the auction house.
+SortAuctionItems("type", "sort") - Request that the specified auction list be sorted by a specific column.
+StartAuction(minBid, buyoutPrice, runTime, stackSize, numStacks) - Starts the auction you have created in the Create Auction panel.
+UI AuctionFrameAuctions.duration - Set the amount of time the auction will run for in minutes.
+Bank
+BankButtonIDToInvSlotID(buttonID, isBag) - Returns the ID number of a bank button or bag in terms of inventory slot ID.
+CloseBankFrame() - Close the bank frame if it's open.
+GetBankSlotCost(numSlots) - Returns the cost of the next bank slot.
+GetNumBankSlots() - Returns total purchased bank bag slots, and a flag indicating if it's full.
+PurchaseSlot() - Buys another bank slot if available.
+Barber Shop
+These functions were introduced in 3.0.2.
+
+ApplyBarberShopStyle() - Purchase and apply the cosmetic changes.
+BarberShopReset() - Reset any changes made in the Barber Shop.
+CancelBarberShop() - Exit the Barber Shop chair.
+GetBarberShopStyleInfo(id) - Returns information about the currently selected style.
+GetBarberShopTotalCost() - Returns the total costs of the cosmetic changes.
+GetFacialHairCustomization() - Returns the type of facial hair customization available to the character.
+GetHairCustomization() - Returns the type of haircut customization available to the character.
+SetNextBarberShopStyle(id[, reverse]) - Alters style selection in a particular category.
+Battlefield
+AcceptAreaSpiritHeal() - Accept a spirit heal.
+AcceptBattlefieldPort(index[, acceptFlag]) - Accept or reject an offered battlefield port.
+CancelAreaSpiritHeal() - Cancel a spirit heal.
+CanJoinBattlefieldAsGroup() - returns nil if the player can not do a group join for a battlefield.
+CheckSpiritHealerDist() - Return true if you are in range with spirit healer while dead.
+GetAreaSpiritHealerTime() - Returns the time left until the next resurrection by the Sprit Guide.
+GetBattlefieldEstimatedWaitTime(index) - Get the estimated wait for entry into the battlefield.
+GetBattlefieldFlagPosition(index) - Get the map position and texture of the flag.
+GetBattlefieldInstanceExpiration() - Get shutdown timer for the battlefield instance.
+GetBattlefieldInstanceRunTime() - In milliseconds, the time since battleground started (seems to be queried from server because it is not in sync with time()).
+GetBattlefieldMapIconScale() - Scale of the landmark icons on the battlefield minimap.
+GetBattlefieldPortExpiration(index) - Get the remaining seconds before the battlefield port expires.
+GetBattlefieldPosition(index) - Get the map position and name of a player in the battleground not in your raid.
+GetBattlefieldScore(index) - Get score information about a player.
+GetBattlefieldStatData(playerIndex, slotIndex) - Get information for a player from a column thats specific to a battleground (like Warsong Gulch flag captures).
+GetBattlefieldStatInfo(index) - Get the battleground specific column for the score board.
+GetBattlefieldStatus(index) - Get the battlefield's current status.
+GetBattlefieldTimeWaited(index) - Get time waited in queue in milliseconds.
+GetBattlefieldWinner() - Get the battlefields winner.
+GetBattlegroundInfo() - Returns information about a battleground type.
+GetNumBattlefieldFlagPositions() - Get the number of flag positions available from GetBattlefieldFlagPosition().
+GetNumBattlefieldPositions() - Get the number of positions available from GetBattlefieldPosition().
+GetNumBattlefieldScores() - Returns the number of scores(players) listed in the battlefield scoreboard.
+GetNumBattlefieldStats() - Get the number of battleground specific columns.
+GetNumWorldStateUI() - Get the number of WorldState UI's.
+GetWintergraspWaitTime() - Get the number of seconds until the next Wintergrasp battle. Returns nil if battle is in progress.
+GetWorldStateUIInfo(i) - Get score and flag status within a battlefield.
+IsPVPTimerRunning()
+JoinBattlefield(index[, joinAs]) - Queue for a battleground either solo or as a group.
+LeaveBattlefield() - Leave the current battlefield
+ReportPlayerIsPVPAFK("unit") - Reports the specified player as AFK in a battleground.
+RequestBattlefieldPositions() - Request new data for GetBattlefieldPosition().
+RequestBattlefieldScoreData() - Request new data for GetBattlefieldScore().
+RequestBattlegroundInstanceInfo(index) - Requests data about the available instances of a battleground.
+SetBattlefieldScoreFaction([faction]) - Set the faction to show on the battlefield scoreboard.
+Binding
+GetBinding(index) - Get action and key bindings for that index.
+GetBindingAction("KEY" [,checkOverride]) - Get the action bound to that key.
+GetBindingKey("command") - Get the key(s) bound to that action.
+UI GetBindingText("key", "prefix", returnAbbr) - Gets the string value for the key.
+GetCurrentBindingSet() - Queries if current set of key bindings is character or account specific
+GetNumBindings() - Get total number key bindings and headers.
+LoadBindings(which) - Loads default, account or character specific key binding set into memory from disk.
+RunBinding("command"[, "up"]) - Executes the key binding named "command"
+SaveBindings(which) - Saves account or character specific key bindings from memory to disk.
+NOCOMBAT SetBinding("key"[, "command"[, mode]]) - Sets or unsets key bindings. (2.0 - Can not be used in combat.)
+NOCOMBAT SetBindingSpell("KEY", "Spell Name") - Set a key binding directly to a spell, uses the same spell name syntax as /cast.
+NOCOMBAT SetBindingClick("KEY", "ButtonName" [,"mouseButton"]) - Set a key binding directly to a Button object. The click sends a mouse down when the key is pressed, and a mouse up when it is released.
+NOCOMBAT SetBindingItem("KEY", "itemname")
+NOCOMBAT SetBindingMacro("KEY", "macroname"|macroid)
+SetConsoleKey("key") - Sets the console key (normally ~ ).
+NOCOMBAT SetOverrideBinding(owner, isPriority, "KEY" [,"COMMAND"]) - Set (or clear) an override key binding.
+NOCOMBAT SetOverrideBindingSpell(owner, isPriority, "KEY", "spellname")
+NOCOMBAT SetOverrideBindingClick(owner, isPriority, "key", "buttonName" [, "mouseClick"]) - Sets an override binding that acts like a mouse click on a button.
+NOCOMBAT SetOverrideBindingItem(owner, isPriority, "KEY", "itemname")
+NOCOMBAT SetOverrideBindingMacro(owner, isPriority, "KEY", "macroname"|macroid)
+NOCOMBAT ClearOverrideBindings(owner) - Reset all overrides belonging to an owner.
+SetMouselookOverrideBinding("KEY" [,"COMMAND"])
+IsModifierKeyDown() - equivalent to (IsShiftKeyDown() or IsControlKeyDown() or IsAltKeyDown()).
+IsModifiedClick("action") - Returns 1 if the keys for the specified action are down, nil otherwise.
+IsMouseButtonDown([button or "button"])
+Buff / Debuff
+PROTECTED CancelUnitBuff("unit", index or "spell" [,"filter" or "rank"]) - Removes a specific buff from the player.
+PROTECTED CancelShapeshiftForm() - Cancels a druid's shapeshift form buff.
+PROTECTED CancelItemTempEnchantment(weaponHand) - Cancels a temporary weapon enchant on weaponHand (1 for Main hand, 2 for Off hand).
+GetWeaponEnchantInfo() - Return information about main and offhand weapon enchantments.
+UnitAura("unit", index or "buffName" [,filter]) - Returns information about a buff/debuff of a certain unit.
+UnitBuff("unit", index or "buffName" [,castable]) - Retrieves info about a buff of a certain unit.
+UnitDebuff("unit", index or "buffName" [,removable]) - Retrieves info about a debuff of a certain unit.
+Calendar
+HW CalendarAddEvent() - Saves the selected event (new events only, requires hardware input to call)
+CalendarCanAddEvent() - Returns true if player can add an event
+CalendarCanSendInvite() - Returns true if player can send invites
+CalendarCloseEvent() - Closes the selected event without saving it
+CalendarContextDeselectEvent() - (added 3.0.8)
+CalendarContextEventCanComplain(monthOffset, day, eventIndex) - Returns true if player can report the event as spam
+CalendarContextEventCanEdit(monthOffset, day, eventIndex) - Returns true if player can edit the event
+CalendarContextEventClipboard()
+CalendarContextEventComplain(monthOffset, day, eventIndex) - Reports the event as spam
+CalendarContextEventCopy(monthOffset, day, eventIndex) - Copies the event to the clipboard
+CalendarContextEventGetCalendarType()
+CalendarContextEventPaste(monthOffset, day) - Pastes the clipboard event to the date
+CalendarContextEventRemove(monthOffset, day, eventIndex) - Deletes the event
+CalendarContextEventSignUp()
+CalendarContextGetEventIndex() - (added 3.0.8)
+CalendarContextInviteAvailable(monthOffset, day, eventIndex) - Accepts the invitation to the event
+CalendarContextInviteDecline(monthOffset, day, eventIndex) - Declines the invitation to the event
+CalendarContextInviteIsPending(monthOffset, day, eventIndex) - Returns true if the player hasn't responded to the event invite
+CalendarContextInviteTentative()
+CalendarContextInviteType
+CalendarContextInviteModeratorStatus(monthOffset, day, eventIndex)
+CalendarContextInviteRemove(monthOffset, day, eventIndex) - Removes the event from the calendar
+CalendarContextInviteStatus(monthOffset, day, eventIndex) - returns inviteStatus
+CalendarContextSelectEvent(monthOffset, day, eventIndex) - (added 3.0.8)
+CalendarDefaultGuildFilter() - returns minLevel, maxLevel
+CalendarEventAvailable() - Accepts the inviation to the currently open event
+CalendarEventCanEdit() - Returns true if the event can be edited
+CalendarEventCanModerate
+CalendarEventClearAutoApprove() - Turns off automatic confirmations
+CalendarEventClearLocked() - Unlocks the event
+CalendarEventClearModerator()
+CalendarEventDecline() - Declines the invitation to the currently open event
+CalendarEventGetCalendarType()
+CalendarEventGetInvite(inviteeIndex) - Returns status information for an invitee for the currently opened event
+CalendarEventGetInviteResponseTime(inviteIndex)
+CalendarEventGetInviteSortCriterion() - returns criterion, reverse
+CalendarEventGetNumInvites() - Returns the number of invitees for the currently opened event
+CalendarEventGetRepeatOptions() - Returns opt1, opt2
+CalendarEventGetSelectedInvite() - returns inviteIndex
+CalendarEventGetStatusOptions() - Returns ?
+CalendarEventGetTextures(eventType) - Returns title1, tex1, expLvl1, title2, tex2, expLvl2, ...
+CalendarEventGetTypes() - Returns name1, name2, ...
+CalendarEventHasPendingInvite() - Returns true if the player has an unanswered invitation to the currently selected event
+CalendarEventHaveSettingsChanged() - Returns true if the currently open event has been modified
+CalendarEventInvite("Player") - Invite player to currently selected event
+CalendarEventIsModerator()
+CalendarEventRemoveInvite(inviteIndex)
+CalendarEventSelectInvite(inviteIndex)
+CalendarEventSetAutoApprove()
+CalendarEventSetDate(month, day, year)
+CalendarEventSetDescription(description)
+CalendarEventSetLocked()
+CalendarEventSetLockoutDate(lockoutDate)
+CalendarEventSetLockoutTime(lockoutTime)
+CalendarEventSetModerator(index)
+CalendarEventSetRepeatOption(repeatoption)
+CalendarEventSetSize
+CalendarEventSetStatus(index, status) - Sets the invitation status of a player to the current event
+CalendarEventSetTextureID(textureIndex)
+CalendarEventSetTime(hour, minute)
+CalendarEventSetTitle(title)
+CalendarEventSetType(type)
+CalendarEventSignUp()
+CalendarEventSortInvites(criterion)
+CalendarEventTentative()
+CalendarGetAbsMonth() - returns month, year
+CalendarGetDate() - Call this only after PLAYER_ENTERING_WORLD event
+CalendarGetDayEvent(monthOffset, day, eventIndex)
+CalendarGetDayEventSequenceInfo - Retrieve information about the specified event.
+CalendarGetEventIndex() - returns monthOffset, day, index
+CalendarGetEventInfo() - Returns detailed information about an event selected with CalendarOpenEvent()
+CalendarGetFirstPendingInvite(monthOffset, day) - returns eventIndex
+CalendarGetHolidayInfo(monthOffset, day, eventIndex) - Returns Holiday Name, Holiday Description, Calendar Icon
+CalendarGetMaxCreateDate() - returns maxWeekday, maxMonth, maxDay, maxYear
+CalendarGetMaxDate() - returns maxWeekday, maxMonth, maxDay, maxYear
+CalendarGetMinDate() - returns minWeekday, minMonth, minDay, minYear
+CalendarGetMinHistoryDate() - returns minWeekday, minMonth, minDay, minYear
+CalendarGetMonth([monthOffset]) - returns month, year
+CalendarGetMonthNames() - returns a list of the month names
+CalendarGetNumDayEvents(monthOffset[, day])
+CalendarGetNumPendingInvites() - returns count
+CalendarGetRaidInfo (monthOffset, day, eventIndex) - returns name, calendarType, raidID, hour, minute, difficulty
+CalendarGetWeekdayNames() - returns a list of the weekday names
+CalendarIsActionPending() - returns isPending
+CalendarMassInviteArenaTeam(teamType)
+CalendarMassInviteGuild(minLevel, maxLevel, rank)
+CalendarNewEvent() - Creates and selected a new event
+CalendarNewGuildAnnouncement()
+CalendarNewGuildEvent(minLevel, maxLevel, minRank) - Replaces the invite list of the selected new event with the specified guild members
+CalendarOpenEvent(monthOffset, day, eventIndex) - Selects an existing event
+CalendarRemoveEvent() - Removes the selected event from the calendar (invitees only)
+CalendarSetAbsMonth(month, year) - Sets the reference month and year for functions which use a month offset
+CalendarSetMonth(monthOffset)
+CalendarUpdateEvent() - Saves the selected event (existing events only, requires hardware input to call)
+OpenCalendar() - Requests calendar information from the server. Does not open the calendar frame. (added 3.0.8)
+Camera
+'Mouse Look' refers to holding down the right mouse button and controlli

@@ -1,0 +1,475 @@
+
+Game Guides
+FREE - In Google Play
+VIEW
+ 
+
+Widget API
+Last edited on February 14, 2015
+by Celess22
+Reference 
+e
+AddOns
+WoW API
+Widget API
+XML UI
+Event API
+WoW Lua
+Macro API
+CVars
+Changes
+
+Web API
+
+HOWTOs
+Snippets
+UI tech.
+
+Categories
+
+→ Widgets
+This Widget API reference, and the term Widget, refer to the UIObject Lua API, and the specific APIs of the actual UIObjects found in WoW. This is a list of all of the Widget API UIObject specific functions found by scanning the in-game environment. See also Widget handlers and XML UI.
+
+Can click on each the secion heading for Lua class details
+
+advertisement
+
+Root Widgets
+Object
+This is an abstract UI object type which cannot actually be created. Is base type for all types.
+
+GetParent() - Moved from Region:GetParent(). This is essentially the same as the old version, except that you can no longer assume that your object has a Frame type in its hierarchy somewhere.
+UIObject
+This is an abstract UI object type which cannot actually be created. Is base type for all widget types.
+
+GetAlpha() - Return this object's alpha (transparency) value.
+GetName() - Return the name of the object.
+GetObjectType() - Get the type of this object.
+IsForbidden() - Return bool indicating is secure widget instance.
+IsObjectType("type") - Determine if this object is of the specified type, or a subclass of that type.
+SetAlpha(alpha) - Set the object's alpha (transparency) value.
+UIObject Derivatives
+Have all of the methods from UIObject, plus the following:
+
+AnimationGroup
+This manages playback, order, and looping of its child Animations. (added 3.1.0)
+
+Play() - Start playing the animations in this group.
+Pause() - Pause the animations in this group.
+Stop() - Stop all animations in this group.
+Finish() - Notify this group to stop playing once the current loop cycle is done.
+GetProgress() - Returns the progress of this animation as a unit value [0,1].
+IsDone() - Returns true if the group has finished playing.
+IsPlaying() - Returns true if the group is playing.
+IsPaused() - Returns true if the group is paused.
+GetDuration() - Gets the total duration for one loop cycle of all child Animations.
+SetLooping(loopType) - Sets the group loop type [NONE, REPEAT, BOUNCE]
+GetLooping() - Gets the group loop type.
+GetLoopState() - Gets the current group loop state [NONE, FORWARD, REVERSE]
+CreateAnimation("animationType", ["name"[,"inheritsFrom"]]) - Create and return an Animation as a child of this group.
+HasScript("handler") - Same as Frame:HasScript [OnLoad, OnPlay, OnPaused, OnStop, OnFinished, OnUpdate].
+GetScript("handler") - Same as Frame:GetScript [OnLoad, OnPlay, OnPaused, OnStop, OnFinished, OnUpdate].
+SetScript("handler", function) - Same as Frame:SetScript [OnLoad, OnPlay, OnPaused, OnStop, OnFinished, OnUpdate].
+Animation
+Is the base animation type for animations in an AnimationGroup. (added 3.1.0)
+
+Play() - Play the animation.
+Pause() - Pause the animation.
+Stop() - Stop the animation.
+IsDone() - Returns true if the animation has finished playing.
+IsPlaying() - Returns true if the animation is playing.
+IsPaused() - Returns true if the animation is paused.
+IsStopped() - Returns true if the animation is stopped.
+IsDelaying() - Returns true if the animation is in the middle of a start or end delay.
+GetElapsed() - Gets the amount of time in seconds that the animation has been playing for.
+SetStartDelay(delaySec) - Set the seconds that the animation delays before it starts to progress.
+GetStartDelay() - Get the seconds that the animation delays before it starts to progress.
+SetEndDelay(delaySec) - Set the number of seconds the animation delays after finishing.
+GetEndDelay() - Get the number of seconds the animation delays after finishing.
+SetDuration(durationSec) - Set the seconds it takes for the animation to progress from start to finish.
+GetDuration() - Get the seconds it takes for the animation to progress from start to finish.
+GetProgress() - Returns the progress of the animation as a unit value [0,1]. Ignores start and end delay.
+GetSmoothProgress() - Returns a smoothed, [0,1] progress value for the animation.
+GetProgressWithDelay() - Returns the progress of the animation combined with its start and end delay.
+SetMaxFramerate(framerate) - Sets the maximum fps that the animation will update its progress.
+GetMaxFramerate() - Gets the maximum fps that the animation will update its progress.
+SetOrder(order) - Sets the order that the animation plays within its parent group. Range is [1,100].
+GetOrder() - Gets the order of the animation within its parent group.
+SetSmoothing(smoothType) - Sets the smoothing type for the animation [IN,OUT,IN_OUT,OUT_IN]
+GetSmoothing() - Gets the smoothing type for the animation.
+SetParent(animGroup or "animGroupName") - Sets the parent for the animation. If the animation was not already a child of the parent, the parent will insert the animation into the proper order amongst its children.
+GetRegionParent() - Gets the Region object that the animation operates on. The region object is this Animation's parent's parent (the AnimationGroup's parent).
+HasScript("handler") - Same as Frame:HasScript [OnLoad, OnPlay, OnPaused, OnStop, OnFinished, OnUpdate]
+GetScript("handler") - Same as Frame:GetScript [OnLoad, OnPlay, OnPaused, OnStop, OnFinished, OnUpdate]
+SetScript("handler") - Same as Frame:SetScript [OnLoad, OnPlay, OnPaused, OnStop, OnFinished, OnUpdate]
+FontInstance
+This is an abstract object type that provides font related methods.
+
+GetFont() - Return the font file, height, and flags.
+GetFontObject() - Return the 'parent' Font object, or nil if none.
+GetJustifyH() - Return the horizontal text justification.
+GetJustifyV() - Return thevertical text justification.
+GetShadowColor() - Returns the color of text shadow (r, g, b, a).
+GetShadowOffset() - Returns the text shadow offset (x, y).
+GetSpacing() - Returns the text spacing.
+GetTextColor() - Returns the default text color.
+SetFont("path", height[,"flags"]) - Sets the font to use for text, returns 1 if the path was valid, nil otherwise (no change occurs).
+SetFontObject(fontObject) - Sets the 'parent' Font object from which this object inherits properties.
+SetJustifyH("justifyH") - Sets horizontal text justification ("LEFT","RIGHT", or "CENTER")
+SetJustifyV("justifyV") - Sets vertical text justification ("TOP","BOTTOM", or "MIDDLE")
+SetShadowColor(r, g, b[, a]) - Sets the text shadow color.
+SetShadowOffset(x, y) - Sets the text shadow offset.
+SetSpacing(spacing) - Sets the spacing between lines of text in the object.
+SetTextColor(r, g, b[, a]) - Sets the default text color.
+Region
+This is an abstract object type which cannot actually be created. Defines a potentially visible area.
+
+ClearAllPoints() - Clear all attachment points for this object.
+CreateAnimationGroup(["name"[,"inheritsFrom"]]) - Create and return a new AnimationGroup as a child of this Region. (added 3.1.0)
+GetAnimationGroups() - Returns all AnimationGroups that are children of this Region. (added 3.1.0)
+GetBottom() - Get the y location of the bottom edge of this frame - Moved in 1.10.
+GetCenter() - Get the coordinates of the center of this frame - Moved in 1.10.
+GetHeight() - Get the height of this object.
+GetLeft() - Get the x location of the left edge of this frame - Moved in 1.10.
+GetNumPoints() - Get the number of anchor points for this frame (added 1.10)
+GetPoint(pointNum) - Get details for an anchor point for this frame (point, relativeTo, relativePoint, xofs, yofs) (added 1.10)
+GetRect() - Get frame's left, bottom, width, height.
+GetRight() - Get the x location of the right edge of this frame - Moved in 1.10.
+GetSize() - Get the width and height of the frame
+GetTop() - Get the y location of the top edge of this frame - Moved in 1.10.
+GetWidth() - Get the width of this object.
+Hide() - Set this object to hidden (it and all of its children will disappear).
+IsDragging() - True if this Region or its Parent is being dragged. (added 3.1.0)
+IsProtected() - Determine if this object can be manipulated in certain ways by tainted code in combat or not
+IsShown() - Determine if this object is shown (would be visible if its parent was visible).
+IsVisible() - Get whether the object is visible on screen (logically (IsShown() and GetParent():IsVisible()));
+SetAllPoints(frame or "frameName") - Set all anchors to match edges of specified frame - Moved in 1.10.
+SetHeight(height) - Set the height of the object.
+SetParent(parent or "parentName") - Set the parent for this frame - Moved in 1.10.
+SetPoint("point","relativeFrame" or relativeObject,"relativePoint"[, xOfs, yOfs]) - Set an attachment point of this object - Updated in 1.10. Since 2.2 cooordinates are now relative to the closest anchor point
+SetSize(width, height) - Set the region's width and height
+SetWidth(width) - Set the width of the object.
+Show() - Set this object to shown (it will appear if its parent is visible).
+StopAnimating() - Stops any active animations on the Region and its children. (added 3.1.0)
+Animation Derivatives
+Have all of the methods of UIObject and Animation, plus the following:
+
+Alpha
+This animation changes the alpha value of its parent region.
+
+SetChange(change) - Sets the amount that the alpha value of this animation's parent Region changes by.
+GetChange() - Gets the amount that the alpha value of this animation's parent Region changes by.
+Path
+This animation combines multiple animation translations.
+
+CreateControlPoint(["name" [, "template" [, order]]]) - Adds a new path control point.
+GetControlPoints() - Returns an arg list of current path control points.
+GetCurve() - Returns the path 'curveType'.
+GetMaxOrder() - Returns highest 'orderId' currently set for any of the control points .
+SetCurve("curveType") - Sets the path 'curveType'.
+Rotation
+This is an affine transformation that rotates a parent Region about an origin.
+
+SetDegrees(degrees) - Sets the amount of degrees that the animation's parent Region would rotate.
+GetDegrees() - Gets the amount of degrees that the animation's parent Region would rotate.
+SetRadians(radians) - Sets the amount of radians that the animation's parent Region would travel.
+GetRadians() - Gets the amount of radians that the animation's parent Region would travel.
+SetOrigin(point, offsetX, offsetY) - Sets the animation's origin of rotation for its parent Region.
+GetOrigin() - Gets the point, Xoffset, and Yoffset for animation's rotation origin in its parent Region.
+Scale
+This is an affine transformation that scales a parent Region about an origin. The scale can be non-uniform.
+
+SetScale(x, y) - Sets the X scalar and the Y scalar that the animation's parent Region should scale by.
+GetScale() - Gets the X scalar and the Y scalar that the animation's parent Region should scale by.
+SetOrigin(point, offsetX, offsetY) - Sets the animation's origin of rotation for its parent Region.
+GetOrigin() - Gets the point, X offset, and Y offset of the animation's origin of rotation for its parent Region.
+Translation
+This is an affine transformation that moves a parent Region by an offset.
+
+SetOffset(x, y) - Sets the offset that the animation's parent Region would travel.
+GetOffset() - Gets the offset that the animation's parent Region would travel.
+FontInstance Derivatives
+Have all of the methods from UIObject and FontInstance, plus the following:
+
+Font
+Allows base font information to be defined, rather than creating a full-blown FontString. (added 1.10)
+
+CopyFontObject(otherFont) - Set this Font's attributes to be a copy of the otherFont font object's.
+Region Derivatives
+Have all of the methods from UIObject and Region, plus the following:
+
+Frame
+CreateFontString(["name"[,"layer"[,"inheritsFrom"]]]) - Create and return FontString as a child of this Frame (added 'InheritsFrom' 1.11)
+CreateTexture(["name"[,"layer"]][,"inheritsFrom"]) - Create and return Texture as a child of this Frame. Good for solid colors. - (added 'InheritsFrom' 1.11)
+CreateTitleRegion() - Create a title region for the frame if it does not have one. (added 1.11)
+DisableDrawLayer("layer") - Disable rendering of "regions" (fontstrings, textures) in the specified draw layer.
+EnableDrawLayer("layer") - Enable rendering of "regions" (fontstrings, textures) in the specified draw layer.
+EnableKeyboard(enableFlag) - Set whether this frame will get keyboard input.
+EnableMouse(enableFlag) - Set whether this frame will get mouse input.
+EnableMouseWheel(enableFlag) - Set whether this frame will get mouse wheel notifications.
+GetAttribute(prefix, name, suffix) - Returns the first existing attribute of (prefix..name..suffix), ("*"..name..suffix), (prefix..name.."*"), ("*"..name.."*"), (name).
+GetBackdrop() - Creates and returns a backdrop table suitable for use in SetBackdrop (added 1.11)
+GetBackdropBorderColor() - Gets the frame's backdrop border color (r, g, b, a) (added 1.11)
+GetBackdropColor() - Gets the frame's backdrop color (r, g, b, a) (added 1.11)
+GetChildren() - Get the list of "children" (frames and things derived from frames) of this frame.
+GetClampRectInsets() - Gets the modifiers to the frame's rectangle used for clamping the frame to screen.
+GetDepth() (added 3.0.8)
+GetEffectiveAlpha() - Returns the effective alpha of a frame. (added 2.1)
+GetEffectiveDepth() (added 3.0.8)
+GetEffectiveScale() - Get the scale factor of this object relative to the root window.
+GetFrameLevel() - Get the level of this frame.
+GetFrameStrata() - Get the strata of this frame.
+GetFrameType() - Get the type of this frame.
+GetHitRectInsets() - Gets the frame's hit rectangle inset distances (l, r, t, b) (added 1.11)
+GetID() - Get the ID of this frame.
+GetMaxResize() - Gets the frame's maximum allowed resize bounds (w, h) (added 1.11)
+GetMinResize() - Gets the frame's minimum allowed resize bounds (w, h) (added 1.11)
+GetNumChildren() - Get the number of "children" (frames and things derived from frames) this frame has.
+GetNumRegions() - Return the number of "regions" (fontstrings, textures) belonging to this frame.
+GetRegions() - Return the "regions" (fontstrings, textures) of the frame (multiple return values) belonging to this frame.
+GetScale() - Get the scale factor of this object relative to its parent.
+GetScript("handler") - Get the function for one of this frame's handlers.
+GetTitleRegion() - Return the frame's title region (added 1.11)
+HasScript("handler") - Return true if the frame can be given a handler of the specified type (NOT whether it actually HAS one, use GetScript for that) (added 1.8)
+HookScript("handler", function) - Hook a secure frame script. - Since 2.1.
+IgnoreDepth(ignoreFlag) (added 3.0.8)
+IsClampedToScreen() - Gets whether the frame is prohibited from being dragged off screen (added 1.11)
+IsEventRegistered("event") - Returns true if the given event is registered to the frame. (added 2.3)
+IsFrameType("type") - Determine if this frame is of the specified type, or a subclass of that type.
+IsIgnoringDepth() (added 3.0.8)
+IsKeyboardEnabled() - Get whether this frame will get keyboard input. (added 1.11)
+IsMouseEnabled() - Get whether this frame will get mouse input. (added 1.11)
+IsMouseWheelEnabled() - Get whether this frame will get mouse wheel notifications. (added 1.11)
+IsMovable() - Determine if the frame can be moved.
+IsResizable() - Determine if the frame can be resized.
+IsToplevel() - Get whether the frame is set as toplevel (added 1.10.2)
+IsUserPlaced() - Determine if this frame has been relocated by the user.
+Lower() - Lower this frame behind other frames.
+Raise() - Raise this frame above other frames.
+RegisterAllEvents() - Register this frame to receive all events (For debugging purposes only!) (added 1.11)
+RegisterEvent("event") - Indicate that this frame should be notified when event occurs.
+RegisterForDrag("buttonType"[,"buttonType"...]) - Inidicate that this frame should be notified of drag events for the specified buttons.
+SetBackdrop([backdropTable]) - Set the backdrop of the frame according to the specification provided.
+SetBackdropBorderColor(r, g, b[, a]) - Set the frame's backdrop's border's color.
+SetBackdropColor(r, g, b[, a]) - Set the frame's backdrop color.
+SetClampedToScreen(clamped) - Set whether the frame is prohibited from being dragged off screen (added 1.11)
+SetClampRectInsets(left, right, top, bottom) - Modify the frame's rectangle used to prevent dragging offscreen.
+SetDepth(depth) (added 3.0.8)
+SetFrameLevel(level) - Set the level of this frame (determines which of overlapping frames shows on top).
+SetFrameStrata("strata") - Set the strata of this frame.
+SetHitRectInsets(left, right, top, bottom) - Set the inset distances for the frame's hit rectangle (added 1.11)
+SetID(id) - Set the ID of this frame.
+SetMaxResize(maxWidth, maxHeight) - Set the maximum dimensions this frame can be resized to.
+SetMinResize(minWidth, minHeight) - Set the minimum dimensions this frame can be resized to.
+SetMovable(isMovable) - Set whether the frame can be moved.
+SetResizable(isResizable) - Set whether the frame can be resized.
+SetScale(scale) - Set the scale factor of this frame relative to its parent.
+SetScript("handler", function) - Set the function to use for a handler on this frame.
+SetToplevel(isTopLevel) - Set whether the frame should raise itself when clicked (added 1.10.2)
+SetUserPlaced(isUserPlaced) - Set whether the frame has been relocated by the user, and will thus be saved in the layout cache.
+StartMoving() - Start moving this frame.
+StartSizing("point") - Start sizing this frame using the specified anchor point.
+StopMovingOrSizing() - Stop moving and/or sizing this frame.
+UnregisterAllEvents() - Indicate that this frame should no longer be notified when any events occur.
+UnregisterEvent("event") - Indicate that this frame should no longer be notified when event occurs.
+LayeredRegion
+An abstract type for objects that represent a potentially visible area defined in a layer.
+
+GetDrawLayer() - Returns the draw layer for the Region (added 1.10)
+SetDrawLayer("layer") - Sets the draw layer for the Region (added 1.10)
+SetVertexColor(r, g, b[, alpha])
+Frame Derivatives
+Have all of the methods from UIObject, Region and Frame, plus the following:
+
+Button
+Click() - Execute the click action of the button.
+Disable() - Disable the Button so that it cannot be clicked.
+Enable() - Enable to the Button so that it may be clicked.
+GetButtonState() - Return the current state ("PUSHED","NORMAL") of the Button.
+GetDisabledFontObject() - Return the font object for the Button when disabled (added 1.10)
+REMOVED GetDisabledTextColor() - Get the color of this button's text when disabled (r, g, b, a) (added 1.11)(removed 3.0.2)
+GetDisabledTexture() - Get the texture for this button when disabled (added 1.11)
+REMOVED GetFont() - Returns the font, size, and flags currently used for display on the Button. (removed 3.0.2)
+GetFontString() - Get this button's label FontString (added 1.11)
+GetHighlightFontObject() - Return the font object for the Button when highlighted (added 1.10)
+REMOVED GetHighlightTextColor() - Get the color of this button's text when highlighted (r, g, b, a) (added 1.11)(removed 3.0.2)
+GetHighlightTexture() - Get the texture for this button when highlighted (added 1.11)
+GetNormalTexture() - Get the normal texture for this button (added 1.11)
+GetNormalFontObject() - Get the Normal Font Object of the button (added 3.0.0)
+GetPushedTextOffset() - Get the text offset when this button is pushed (x, y) (added 1.11)
+GetPushedTexture() - Get the texture for this button when pushed (added 1.11)
+GetText() - Get the text label for the Button.
+REMOVED GetTextColor() - Get the normal color of this button's text (r, g, b, a) (added 1.11) (removed 3.0.2)
+REMOVED GetTextFontObject() - Return the font object for the Button's normal text (added 1.10)(removed 3.0.2)
+GetTextHeight() - Get the height of the Button's text.
+GetTextWidth() - Get the width of the Button's text.
+IsEnabled() - Determine whether the Button is enabled.
+LockHighlight() - Set the Button to always be drawn highlighted.
+RegisterForClicks("clickType"[,"clickType"...]) - Specify which mouse button up/down actions cause receive an OnClick notification.
+SetButtonState("state"[, lock]) - Set the state of the Button ("PUSHED", "NORMAL") and whether it is locked.
+SetDisabledFontObject([font]) - Set the font object for settings when disabled (added 1.10)
+REMOVED SetDisabledTextColor(r, g, b[, a]) - Set the disabled text color for the Button. (removed 4.0.1)
+SetDisabledTexture(texture or "texturePath") - Set the disabled texture for the Button (updated in 1.10)
+SetFont("font", size[,"flags"]) - Set the font to use for display.
+SetFontString(fontString) - Set the button's label FontString (added 1.11)
+SetFormattedText("formatstring"[, ...]) - Set the formatted text label for the Button. (added 2.3)
+SetHighlightFontObject([font]) - Set the font object for settings when highlighted (added 1.10)
+REMOVED SetHighlightTextColor(r, g, b[, a]) - Set the highlight text color for the Button. (removed 4.0.1)
+SetHighlightTexture(texture or "texturePath"[,alphaMode]) - Set the highlight texture for the Button (updated in 1.10)
+SetNormalTexture(texture or "texturePath") - Set the normal texture for the Button (updated in 1.10)
+SetNormalFontObject(FontString) - Replaces SetTextFontObject (updated in 3.0)
+SetPushedTextOffset(x, y) - Set the text offset for this button when pushed (added 1.11)
+SetPushedTexture(texture or "texturePath") - Set the pushed texture for the Button (updated in 1.10)
+SetText("text") - Set the text label for the Button.
+REMOVED SetTextColor(r, g, b) - Set the text color for the Button. (removed 3.0.2)
+REMOVED SetTextFontObject([font]) - Set the font object to get settings from for this Button's normal state (added 1.10)(removed 3.0.2)
+UnlockHighlight() - Set the Button to not always be drawn highlighted.
+Cooldown
+GetReverse() - returns true or false
+SetCooldown(Start, Duration)
+SetReverse(boolean)
+ColorSelect
+GetColorHSV() - Get the HSV values of the selected color.
+GetColorRGB() - Get the RGB values of the selected color.
+GetColorValueTexture() - Get the texture used to show color value (added 1.11)
+GetColorValueThumbTexture() - Get the texture for the color value thumb (added 1.11)
+GetColorWheelTexture() - Get the texture for the color wheel (added 1.11)
+GetColorWheelThumbTexture() - Get the texture for the color wheel thumb (added 1.11)
+SetColorHSV(h, s, v) - Set to a specific HSV color.
+SetColorRGB(r, g, b) - Set to a specific RGB color.
+SetColorValueTexture(texture or nil) - Set the texture used to show color value (added 1.11)
+SetColorValueThumbTexture(texture or "texture" or nil) - Set the texture for the color value thumb (added 1.11)
+SetColorWheelTexture(texture or nil) - Set the texture for the color wheel (added 1.11)
+SetColorWheelThumbTexture(texture or "texture" or nil) - Set the texture for the color wheel thumb (added 1.11)
+EditBox
+EditBox additionally has all of the methods from FontInstance, plus the following:
+
+AddHistoryLine("text") - Add text to the edit history.
+ClearFocus()
+GetAltArrowKeyMode() - Return whether only alt+arrow keys work for navigating the edit box, not arrow keys alone.
+GetBlinkSpeed() - Gets the blink speed of the EditBox in seconds (added 1.11)
+GetCursorPosition() - Gets the position of the cursor inside the EditBox (added 2.3)
+GetHistoryLines() - Get the number of history lines for this edit box
+GetHyperlinksEnabled() (added 3.0.8)
+GetInputLanguage() - Get the input language. locale based, not in-game.
+GetMaxBytes() - Gets the maximum number bytes allowed in the EditBox (added 1.11)
+GetMaxLetters() - Gets the maximum number of letters allowed in the EditBox (added 1.11)
+GetNumLetters() - Gets the number of letters in the box.
+GetNumber()
+GetText() - Get the current text contained in the edit box.
+GetTextInsets() - Gets the text display insets for the EditBox (added 1.11)
+HighlightText([startPos, endPos]) - Set the highlight to all or some of the edit box text.
+Insert("text") - Insert text into the edit box.
+IsAutoFocus() - Determine if the EditBox has autofocus enabled (added 1.11)
+IsMultiLine() - Determine if the EditBox accepts multiple lines (added 1.11)
+IsNumeric() - Determine if the EditBox only accepts numeric input (added 1.11)
+IsPassword() - Determine if the EditBox performs password masking (added 1.11)
+SetAltArrowKeyMode(enable) - Make only alt+arrow keys work for navigating the edit box, not arrow keys alone.
+SetAutoFocus(state) - Set whether or not the editbox will attempt to get input focus when it gets shown. default: true (added 1.11)
+SetBlinkSpeed
+SetCursorPosition(position) - Set the position of the cursor within the EditBox (added 2.3)
+SetFocus() - Move input focus (the cursor) to this editbox
+SetFont("font", size[,"flags"]) - Set the font to use for display.
+SetHistoryLines() - Set the number of history lines to remember.
+SetHyperlinksEnabled(enableFlag) (added 3.0.8)
+SetMaxBytes(maxBytes) - Set the maximum byte size for entered text.
+SetMaxLetters(maxLetters) - Set the maximum number of letters for entered text.
+SetMultiLine(state) - Set the EditBox's multi-line state (added 1.11)
+SetNumber(number)
+SetNumeric(state) - Set if the EditBox only accepts numeric input (added 1.11)
+SetPassword(state) - Set the EditBox's password masking state (added 1.11)
+SetText("text") - Set the text contained in the edit box.
+SetTextInsets(l, r, t, b)
+ToggleInputLanguage()
+GameTooltip
+The tooltip automatically resizes itself when its Show() method is called.
+
+AddDoubleLine(textL, textR, rL, gL, bL, rR, gR, bR)
+AddFontStrings(leftstring, rightstring) - Dynamically expands the size of a tooltip (added 1.11)
+AddLine("text" [, red, green, blue [, wrapText]]) - Appends a new line to the tooltip.
+AddTexture("texture") - Add a texture to the last line added.
+AppendText("text") - Append text to the end of the first line of the tooltip.
+ClearLines() - Clear all lines of tooltip (both left and right ones)
+FadeOut
+GetAnchorType() - Returns the current anchoring type.
+GetItem() - Returns name, link.
+GetMinimumWidth() -
+GetSpell() - Returns name, rank.
+GetOwner() - Returns owner frame, anchor.
+GetUnit() - Returns unit name, unit id.
+IsUnit("unit") - Returns bool.
+NumLines() - Get the number of lines in the tooltip.
+SetAction(slot) - Shows the tooltip for the specified action button.
+SetAuctionCompareItem("type", index[, offset])
+SetAuctionItem("type", index) - Shows the tooltip for the specified auction item.
+SetAuctionSellItem
+SetBackpackToken(id) -
+SetBagItem(bag, slot)
+SetBuybackItem
+REMOVED SetCraftItem (removed 3.0.2)
+REMOVED SetCraftSpell (removed 3.0.2)
+SetCurrencyToken(tokenId) - Shows the tooltip for the specified token
+SetFrameStack(showhidden) - Shows the mouseover frame stack, used for debugging.
+SetGlyph(id) -
+SetGuildBankItem(tab, id) - Shows the tooltip for the specified guild bank item
+SetHyperlink("itemString" or "itemLink") - Changes the item which is displayed in the tooltip according to the passed argument.
+SetHyperlinkCompareItem("itemLink", index) - Sets a comparison tooltip for the index. returns true if comparison. [index 1 .. 3]
+SetInboxItem(index) - Shows the tooltip for the specified mail inbox item.
+SetInventoryItem(unit, slot[, nameOnly])
+SetLootItem
+SetLootRollItem(id) - Shows the tooltip for the specified loot roll item.
+SetMerchantCompareItem("slot"[, offset])
+SetMerchantItem
+SetMinimumWidth(width) - (Formerly SetMoneyWidth)
+SetOwner(owner, "anchor"[, +x, +y])
+SetPadding
+SetPetAction(slot) - Shows the tooltip for the specified pet action.
+REMOVED SetPlayerBuff(buffIndex) - Direct the tooltip to show information about a player's buff. (removed 3.0.2)
+SetQuestItem
+SetQuestLogItem
+SetQuestLogRewardSpell - Shows the tooltip for the spell reward of the currently selected quest.
+SetQuestRewardSpell
+SetSendMailItem
+SetShapeshift(slot) - Shows the tooltip for the specified shapeshift form.
+SetSpell(spellId, bookType) - Shows the tooltip for the specified spell.
+SetTalent(tabIndex, talentIndex) - Shows the tooltip for the specified talent.
+SetText("text"[, red, green, blue[, alpha[, textWrap]]]) - Set the text of the tooltip.
+SetTracking
+SetTradePlayerItem
+SetTradeSkillItem
+SetTradeTargetItem
+SetTrainerService
+SetUnit
+SetUnitAura("unitId", auraIndex[, filter]) - Shows the tooltip for a unit's aura. (Exclusive to 3.x.x / WotLK)
+SetUnitBuff("unitId", buffIndex[, raidFilter]) - Shows the tooltip for a unit's buff.
+SetUnitDebuff("unitId", buffIndex[, raidFilter]) - Shows the tooltip for a unit's debuff.
+MessageFrame
+MessageFrame additionally has all of the methods from FontInstance, plus the following:
+
+AddMessage("text", r, g, b, messageGroup, holdTime) - Add a message to the frame which will fade eventually.
+Clear() - Clear the messages from the frame (added 1.11)
+GetFadeDuration() - Gets the fade duration in seconds (added 1.11)
+GetFading() - Get whether the frame is fading (added 1.11)
+GetInsertMode() - Get the insert mode for the frame (added 1.11)
+GetTimeVisible() - Get the message visibility time in seconds (added 1.11)
+SetFadeDuration(seconds) - Set the fade duration (added 1.11)
+SetFading(status) - Set whether the frame fades messages (added 1.11)
+SetInsertMode("TOP" or "BOTTOM") - Set where new messages are inserted (added 1.11)
+SetTimeVisible(seconds) - Sets the message visibility time (added 1.11)
+Minimap
+GetPingPosition() - Get the last ping location.
+GetZoom() - Get the current zoom level.
+GetZoomLevels() - Get the maximum zoom level.
+PingLocation(x, y) - Perform a ping at the specified location. As of 2.4.2 protected while targeting area of effect spells.
+SetArrowModel("file") - Set the file to use for the arrow model (added 1.11)
+SetBlipTexture - Set the file to use for blips (ObjectIcons)
+SetIconTexture
+SetMaskTexture
+SetPlayerModel("file") - Set the file to use for the player model (added 1.11)
+SetZoom(level) - Set the current zoom level.
+Model
+Used to display real 3D-mesh geometry as part of the UI.
+
+AdvanceTime()
+ClearFog() - Removes all fogging effects currently active in rendering.
+ClearModel

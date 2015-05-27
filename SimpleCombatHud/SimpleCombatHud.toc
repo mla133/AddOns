@@ -1,0 +1,25 @@
+# -----------------------------------------------------------------------------
+# The following tags are read by the Warcraft client to determine what version
+# of the client (Interface) the addon has been written to target, the description
+# of the addon to present to the user when they are using the addon management dialog,
+# and other descriptive data for the client.
+# You can use the following command to find out the current build version of the client
+# by typing this into a chat interface.
+#     /run print((select(4, GetBuildInfo())));
+
+# For additional information about the .toc file see http://www.wowwiki.com/TOC_format
+
+## Interface: 40200
+## Version: 1.0.0.1
+## Title: Simple Combat HUD
+## Notes: Provides a simple status bar showing the amount of health and power of the player.
+## Author: Richard Chambers
+
+## SavedVariablesPerCharacter: SimpleCombatHudPerCharDB
+
+# -----------------------------------------------------------------------------
+# The following files are part of the addon to be loaded by the Warcraft client
+# These files are loaded in the order in which they appear so files that depend
+# on other files should be listed after the files they depend on.
+
+Main.lua

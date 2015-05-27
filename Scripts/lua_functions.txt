@@ -1,0 +1,194 @@
+
+Game Guides
+FREE - In Google Play
+VIEW
+ 
+
+Lua functions
+Last edited on January 7, 2015
+by Celess22
+Reference 
+e
+AddOns
+WoW API
+Widget API
+XML UI
+Event API
+WoW Lua
+Macro API
+CVars
+Changes
+
+Web API
+
+HOWTOs
+Snippets
+UI tech.
+
+Categories
+
+→ WoW Lua
+This is the main reference for the World of Warcraft Lua Runtime. Note that these are mostly standard Lua functions, available in most Lua environments. Arguably, we could just refer to the Lua web site, but a few functions differ slightly in Blizzard's implementation. They are all documented here for consistency.
+
+advertisement
+
+Reference
+The World of Warcraft Lua runtime does not provide all standard Lua functions. Notably, the operating system and file I/O libraries are not present. Nearly all of these functions are part of the default Lua 5.1 runtime environment, described here.
+
+Core
+assert(value[, errormsg]) - returns 'value' if not false. otherwise throws a Lua error using 'message'.
+collectgarbage() - Forces garbage collection. (added 1.10.1)
+date(format, time) - Returns the current date according to the user's machine.
+error("error message",level) - Throws an error with the given error message. Use pcall() (see below) to catch errors.
+gcinfo() - Returns the number of kB of add-on memory in use and the current garbage collection threshold (in kB).
+getfenv(function or integer) - Returns the table representing the stack frame of the given function or stack level.
+getmetatable(obj, mtable) - Returns the metatable of the given table or userdata object.
+loadstring("Lua code") - Parse the string as Lua code and return it as a function reference.
+next(table, index) - Returns the next key, value pair of the table, allowing you to walk over the table.
+newproxy(boolean or proxy) - Creates a userdata with a sharable metatable.
+pcall(func, arg1, arg2, ...) - Returns a true value indicating successful execution of 'func' and return values, otherwise false and the error message.
+select(index, list) - Returns the number of items in list or the value of the item in list at index.
+setfenv(function or integer, table) - Sets the table representing the stack frame of the given function or stack level.
+setmetatable(obj, mtable) - Sets the metatable of the given table or userdata object.
+time(table) - Returns time in seconds since epoch (00:00:00 Jan 1 1970)
+type(var) - Returns the type of variable as a string, "number", "string", "table", "function" or "userdata".
+unpack(table[, start][, end]) - Returns the contents of its argument as separate values.
+xpcall(func, err) - Returns a boolean indicating successful execution of func and calls err on failure, additionally returning func's or err's results.
+Math
+Most of these functions are shorthand references to the Lua math library (which is available via "math.", see MathLibraryTutorial for more info).
+
+The trigonometry functions are not just references; they have degree→radian conversion wrappers. Blizzard's versions work with degrees. Lua's standard math library works with radians.
+
+abs(value) - Returns the absolute value of the number.
+acos(value) - Returns the arc cosine of the value in degrees.
+asin(value) - Returns the arc sine of the value in degrees.
+atan(value) - Returns the arc tangent of the value in degrees.
+atan2(y, x) - Returns the arc tangent of Y/X in degrees.
+ceil(value) - Returns the ceiling of value.
+cos(degrees) - Returns the cosine of the degree value.
+deg(radians) - Returns the degree equivalent of the radian value.
+exp(value) - Returns the exponent of value.
+floor(value) - Returns the floor of value.
+frexp(num) - Extract mantissa and exponent from a floating point number.
+ldexp(value, exponent) - Load exponent of a floating point number.
+log(value) - Returns the natural logarithm (log base e) of value.
+log10(value) - Returns the base-10 logarithm of value.
+max(value[, values...]) - Returns the numeric maximum of the input values.
+min(value[,values...]) - Returns the numeric minimum of the input values.
+mod(value,modulus) - Returns floating point modulus of value.
+rad(degrees) - Returns the radian equivalent of the degree value.
+random([ [lower,] upper]) - Returns a random number (optionally bounded integer value)
+sin(degrees) - Returns the sine of the degree value.
+sqrt(value) - Return the square root of value.
+tan(degrees) - Returns the tangent of the degree value.
+String
+These string functions are shorthand references to the Lua string library, which is available via "string.". See StringLibraryTutorial for more info.
+
+format(formatstring[, value[, ...]]) - Return a formatted string using values passed in.
+gsub(string,pattern,replacement[, limitCount]) - Globally substitute pattern for replacement in string.
+strbyte(string[, index]) - Returns the internal numeric code of the i-th character of string
+strchar(asciiCode[, ...]) - Returns a string with length equal to number of arguments, with each character assigned the internal code for that argument.
+strfind(string, pattern[, initpos[, plain]]) - Look for match of pattern in string, optionally from specific location or using plain substring.
+strlen(string) - Return length of the string.
+strlower(string) - Return string with all upper case changed to lower case.
+strmatch(string, pattern[, initpos]) - Similar to strfind but only returns the matches, not the string positions.
+strrep(seed,count) - Return a string which is count copies of seed.
+strrev(string) - Reverses a string; alias of string.reverse.
+strsub(string, index[, endIndex]) - Return a substring of string starting at index
+strupper(string) - Return string with all lower case changed to upper case.
+tonumber(arg[, base]) - Return a number if arg can be converted to number. Optional argument specifies the base to interpret the numeral. Bases other than 10 accept only unsigned integers.
+tostring(arg) - Convert arg to a string.
+These are custom string functions available in WoW but not normal Lua.
+
+strlenutf8(string) - returns the number of characters in a UTF-8 encoded string.
+strcmputf8i(string,string) - string comparison accounting for UTF-8 chars, returning C style 0, 0<, 0>.
+strtrim(string[, chars]) - Trim leading and trailing spaces or the characters passed to chars from string.
+strsplit(delimiter, string) - Return a list of substrings separated by occurrences of the delimiter.
+strjoin(delimiter, string, string[, ...]) - Join string arguments into a single string, separated by delimiter.
+strconcat(...) - Returns a concatenation of all number/string arguments passed.
+tostringall(...) - Converts all arguments to strings and returns them in the same order that they were passed.
+Table
+These table functions are shorthand references to the Lua table library (which is available via "table.", see TableLibraryTutorial for more info).
+
+Be also aware that many table functions are designed to work with tables indexed only with numerical indexes, starting with 1 and without holes (like {[1] = "foo", [3] = "bar"} --- recognize that [2] will be nil in this table). When working with any other tables behavior is not defined and might lead to unexpected results. Not being aware of this fact is one major causes for bugs in code written in Lua.
+
+foreach(table,function) - Execute function for each element in table. (deprecated, used pairs instead)
+foreachi(table,function) - Execute function for each element in table, indices are visited in sequential order. (deprecated, used ipairs instead)
+getn(table) - Return the size of the table when seen as a list. This is deprecated, it is replaced by the # operator. Instead of table.getn(table), use #(table).
+ipairs(table) - Returns an iterator of type integer to traverse a table.
+pairs(table) - Returns an iterator to traverse a table.
+sort(table[, comp]) - Sort the elements in the table in-place, optionally using a custom comparator.
+tContains(table, value) - returns true if value is contained within table. This is not standard Lua, but added by Blizzard.
+tinsert(table[, pos], value) - Insert value into the table at position pos (defaults to end of table)
+tremove(table[, pos]) - Remove and return the table element at position pos (defaults to last entry in table)
+wipe(table) - Restore the table to its initial value (like tab = {} without the garbage). This is not standard Lua, but added by Blizzard.
+Bit
+World of Warcraft includes the Lua BitLib library (which is available via "bit."), which provides access to C-style bitwise manipulation operators. It has been available since Patch 1.9. This library uses the WoW binary's native integer size. (e.g. on 32-bit builds, bit.lshift(2147483648, 1) = 0, because 1000 0000 0000 0000 0000 0000 0000 0000 -> 0000 0000 0000 0000 0000 0000 0000 0000)
+
+Note: Since Lua is a scripting language, using these functions to "compress" your data structures is fairly slow work. Unless you have a very large database and need to conserve RAM usage, save your information in several, individual variables.
+
+bit.bnot(a) - returns the one's complement of a
+bit.band(w1,...) - returns the bitwise and of the w's
+bit.bor(w1,...) - returns the bitwise or of the w's
+bit.bxor(w1,...) - returns the bitwise exclusive or of the w's
+bit.lshift(a,b) - returns a shifted left b places
+bit.rshift(a,b) - returns a shifted logically right b places
+bit.arshift(a,b) - returns a shifted arithmetically right b places
+bit.mod(a,b) - returns the integer remainder of a divided by b
+Coroutine
+Coroutine functions should be used sparingly because of the amount of memory they use.
+
+coroutine.create(f)
+coroutine.resume(co [, val1, ...])
+coroutine.running()
+coroutine.status(co)
+coroutine.wrap(f)
+coroutine.yield(...)
+Notes
+Some WoW specific Lua notes.
+
+String Functions
+All strings have their metatable set to index the global string table, so any string function may be called through it with the colon syntax:
+-- This...
+local s = string.format(input, arg1, arg2, ...)
+
+-- ...can be written as this
+local s = input:format(arg1, arg2, ...)  -- input gets passed as the first argument, replicating the above code, as per the colon syntax
+To make this work for string constants, you have to use parentheses. "%d":format(arg1) is not valid Lua code, you have to do
+
+("%d"):format(arg1)
+Since this uses the string table, any function placed inside the string table works the same. The following is valid:
+
+function string.print(a)
+ return print(a)
+end
+("test"):print()
+Though you should try to avoid populating the string table with your own functions.
+
+Table Functions
+Any function that takes a table as its first argument can be assigned to a method in said table and used thusly.
+There's no practical reason for doing this, but it's kinda fun to know these useless things.
+Notice that table.wipe (and wipe) will remove itself and all other methods assigned in this manner.
+tab = {}
+
+-- this works, of course.
+tinsert(tab, 1, value) -- change the value at index 1 to value.
+
+-- as does this
+tab.insert = tinsert
+tab:insert(1, value) -- change the value at index 1 to value (note the ":").
+See also
+Lua, which has plenty of links to other reference material.
+API types, with a list of Lua types and 'psudo-types' used in WoW.
+Categories
+Categories: WoW LuaLua functionsUI Customization
+advertisement
+
+Video Games
+Entertainment
+Lifestyle
+Full site
+Licensing
+Privacy Policy
+Feedback
+TABLE OF CONTENTS

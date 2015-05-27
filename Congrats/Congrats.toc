@@ -1,0 +1,5 @@
+## Interface: 60100
+## Title:  Congrats 
+## Notes:  Congratulates player on level up, showing how many HP and mana gained.  Paves way for more addon development using Lua. 
+
+Congrats.lua
