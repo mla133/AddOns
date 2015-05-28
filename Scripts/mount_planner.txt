@@ -1,0 +1,104 @@
+LEG 1 - South Kalimdor
+
+    Start off in Shrine
+    Portal to Stormwind / Orgrimmar
+    Portal to Uldum
+    While around Uldum, you can work on reins of the grey riding camel
+    Run Vortex Pinnacle for:
+        reins of the drake of the north wind from Altarius on normal or heroic mode (0.8%)
+    Run Throne of the Four Winds for:
+        reins of the drake of the south wind from Al'akir on normal or heroic (10 or 25) mode (1.7%)
+    Fly to Sillithus
+    Run Ahn'Qiraj for:
+        red qiraji resonating crystal from Trash on any mode (1.2%)
+        yellow qiraji resonating crystal from Trash on any mode (10%)
+        blue qiraji resonating crystal from Trash on any mode (10%)
+        green qiraji resonating crystal from Trash on any mode (10%)
+    Fly to Tanaris
+    Run Dragon Soul for:
+        experiment 12-B from Ultraxion on normal or heroic (10 or 25) mode (1.2%)
+        reins of the blazing drake from Deathwing on normal or heroic (10 or 25) mode (4%)
+        life-binder's handmaiden from Deathwing on heroic (10 or 25) mode (1.8%)
+    Fly to Dustwallow Marsh
+    Run Onyxia's Lair for:
+        reins of the onyxian drake from Onyxia on 10 or 25 mode (1.2%)
+
+Leg 2 - Northrend
+
+    Start off in Shrine
+    Portal to Dalaran
+    Fly to Icecrown
+    Run Icecrown Citadel for:
+        invincible's reins from Lich king on 25 heroic mode (0.95%)
+    Fly to Wintergrasp
+    Run Vault of Archavon for:
+        reins of the grand black war mammoth from All 4 bosses on 10 or 25 mode (0.8%)
+    Fly to Coldarra
+    Run Eye of Eternity for:
+        reins of the azure drake from Malygos on 10 or 25 mode (4%)
+        reins of the blue drake from Malygos on 10 or 25 mode (4%)
+    Fly to Wyrmrest Temple
+    Run Obsidian Sanctum for:
+        reins of the black drake from Sartharion on 10 (with all 3 drakes alive) mode (100%)
+        reins of the twilight drake from Sartharion on 25 (with all 3 drakes alive) mode (100%)
+    Fly to Howling Fjord
+    Run Utgarde Pinnacle for:
+        reins of the blue proto-drake from Skadi the ruthless on heroic mode (1%)
+    Fly to Storm Peaks
+    Spend a little time looking around for reins of the time-lost proto-drake
+    Run Ulduar for:
+        mimiron's head from Yogg-saron on 25 (0 keepers) mode (1.2%)
+
+Leg 3 - Hyjal
+
+    Start off in Shrine
+    Portal to Stormwind / Orgrimmar
+    Portal to Hyjal
+    Run Firelands for:
+        flametalon of alysrazor from Alysrazor on normal or heroic (10 or 25) mode (2%)
+        smoldering egg of millagazor from Ragnaros on normal or heroic (10 or 25) mode (1.4%)
+
+Leg 4 - Deepholm
+
+    Start off in Shrine
+    Portal to Stormwind / Orgrimmar
+    Portal to Deepholm
+    Have a look around for reins of the phosphorescent stone drake
+    Run Stonecore for:
+        reins of the vitreous stone drake from Slabhide on normal or heroic mode (0.8%)
+
+Leg 5 - Outland/Eastern Kingdoms
+
+    Start off in Shrine
+    Portal to Shattrath
+    Fly to Netherstorm
+    Run Tempest Keep for:
+        ashes of al'ar from Kael'thas on any mode (2%)
+    Fly to Terrokar Forest
+    Run Sethekk Halls for:
+        reins of the raven lord from Anzu on heroic mode (1.7%)
+    Fly back to Shattrath
+    Portal to Isle of Quel'Danas
+    Run Magister's Terrace for:
+        swift white hawkstrider from Kael'thas on heroic mode (3.5%)
+    Fly to Ghostlands
+    Run Zul'Aman for:
+        amani battle bear from Timed reward on heroic mode (100%)
+    Fly to Eastern Plaguelands
+    Run Stratholme for:
+        rivendare's deathcharger from Baron rivendare on any mode (0.70%)
+
+Leg 6 - South Eastern Kingdoms
+
+    Start off in Shrine
+    Portal to Stormwind / Orgrimmar
+    Portal to Blasted Lands
+    Fly to Deadwind Pass
+    Run Karazhan for:
+        fiery warhorse's reins from Attumen the huntsman on any mode (0.8%)
+    Fly to Stranglethorn Vale
+    Run Zul'Gurub for:
+        armored razzashi raptor from Bloodlord mandokir on heroic mode (1%)
+        swift zulian panther from High priestess kilnara on heroic mode (1%)
+
+
